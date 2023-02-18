@@ -1,12 +1,12 @@
 """
-Using DXcam to take screenshots. Only works on Windows.
+Baseline: Doing nothing, to figure out the actual start delay (including Python startup time).
 """
 
 import time
 start_time = time.time()
 
 START_DELAY = 0.5
-NUM_FRAMES = 120
+NUM_FRAMES = 60
 # BBOX = None
 BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
 COUNT_UNIQUE = False
@@ -16,19 +16,14 @@ DEBUG = False
 # BEGIN SCREENSHOT CODE
 # =============================================================================
 
-import dxcam
+import mss
 import numpy as np
-camera = dxcam.create()
-camera.start(target_fps=0, video_mode=False, region=BBOX)
-print("Screen:", camera.get_latest_frame().shape[:2][::-1])
+sct = mss.mss()
+print("Screen:", sct.monitors[0])
 
 
 def get_screenshot():
-    return camera.get_latest_frame()
-    # while True:
-    #     img = camera.grab(region=BBOX)
-    #     if img is not None:
-    #         return img
+    return None
 
 # =============================================================================
 # END SCREENSHOT CODE
@@ -58,8 +53,7 @@ def main():
         img = get_screenshot()
         if DEBUG:
             # Show screenshot with FPS in red
-            to_display = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-            to_display = cv2.resize(to_display, (0, 0), fx=0.5, fy=0.5)
+            to_display = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
             cv2.putText(to_display, f"FPS: {(i+1) / get_time_elapsed():.2f}",
                         (10, 33), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
             cv2.imshow("Screen", to_display)

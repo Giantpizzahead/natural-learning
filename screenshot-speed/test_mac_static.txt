@@ -1,0 +1,38 @@
+Note: Mac has a Retina display, which means the displayed resolution is doubled from
+the *virtual* resolution. That is, for all intents and purposes, treat a 2800 x 1800
+Mac screen as 1400 x 900. (The retina part is ONLY for making the display look better.)
+
+Virtual = Normal resolution, Retina = Double resolution
+Both screenshot libraries use virtual resolution to specify the desired region to grab.
+Then they used different methods to handle the retina resolution:
+
+Pillow - If no region is specified, Pillow uses (0, 0, retina width, retina height).
+First, Pillow uses screencapture (Mac commandline tool) to grab the *virtual resolution* region
+of the screen, returning that region in *retina resolution*. Then, Pillow resizes that image into
+the specified region size, and returns it. All in all, you specify a virtual res size, and Pillow
+returns an image of that virtual res size. But if you don't specify a region, a retina res version
+of the screen is returned.
+
+MSS - If no region is specified, MSS uses (0, 0, virtual width, virtual height).
+Luckily, MSS is straightforward. Query a virtual res region, and the returned image will be retina res.
+
+Basically, just use MSS. I'm just noting down the technical details here for completeness's sake.
+
+Mac M1, whole screen no retina (1400 x 900), mostly static image, 0.5 second start delay, 30 frames
+Fullscreen: VS Code editor
+
+Benchmark 1: python using_baseline.py
+  Time (mean ± σ):     531.1 ms ±   2.2 ms    [User: 1493.7 ms, System: 889.1 ms]
+  Range (min … max):   528.2 ms … 535.1 ms    10 runs
+
+Benchmark 2: python using_nothing.py
+  Time (mean ± σ):     649.7 ms ±   2.4 ms    [User: 1487.7 ms, System: 991.7 ms]
+  Range (min … max):   647.1 ms … 654.0 ms    10 runs
+ 
+Benchmark 3: python using_pillow.py
+  Time (mean ± σ):      9.292 s ±  0.044 s    [User: 6.418 s, System: 1.573 s]
+  Range (min … max):    9.241 s …  9.371 s    10 runs
+ 
+Benchmark 4: python using_mss.py
+  Time (mean ± σ):      1.118 s ±  0.012 s    [User: 1.393 s, System: 1.123 s]
+  Range (min … max):    1.102 s …  1.136 s    10 runs

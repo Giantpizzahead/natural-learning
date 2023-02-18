@@ -1,13 +1,17 @@
 """
-Using Pillow to take screenshots.
+Using Pillow to take screenshots. Cross platform.
 """
 
+import time
+start_time = time.time()
+
 START_DELAY = 0.5
-NUM_FRAMES = 120
+NUM_FRAMES = 600
 BBOX = None
+# BBOX = (0, 0, 1440, 900)
 # BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
-COUNT_UNIQUE = True
-DEBUG = False
+COUNT_UNIQUE = False
+DEBUG = True
 
 # =============================================================================
 # BEGIN SCREENSHOT CODE
@@ -20,8 +24,8 @@ print("Screen:", ImageGrab.grab().size)
 def get_screenshot():
     img = ImageGrab.grab(bbox=BBOX)
     # macOS returns RGBA, but we need RGB
-    if img.mode == "RGBA":
-        img = img.convert("RGB")
+    # if img.mode == "RGBA":
+    #     img = img.convert("RGB")
     return img
 
 # =============================================================================
@@ -30,8 +34,6 @@ def get_screenshot():
 
 import cv2
 import numpy as np
-import time
-start_time = time.time()
 
 
 # Make sure initial setup doesn't affect the benchmark

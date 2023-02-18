@@ -1,13 +1,16 @@
 """
-Using MSS to take screenshots.
+Using MSS to take screenshots. Cross platform.
 """
 
+import time
+start_time = time.time()
+
 START_DELAY = 0.5
-NUM_FRAMES = 120
+NUM_FRAMES = 600
 BBOX = None
 # BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
-COUNT_UNIQUE = True
-DEBUG = False
+COUNT_UNIQUE = False
+DEBUG = True
 
 # =============================================================================
 # BEGIN SCREENSHOT CODE
@@ -27,8 +30,6 @@ def get_screenshot():
 # =============================================================================
 
 import cv2
-import time
-start_time = time.time()
 
 
 # Make sure initial setup doesn't affect the benchmark
@@ -52,6 +53,7 @@ def main():
         img = get_screenshot()
         if DEBUG:
             # Show screenshot with FPS in red
+            print(img.shape)
             to_display = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
             cv2.putText(to_display, f"FPS: {(i+1) / get_time_elapsed():.2f}",
                         (10, 33), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
