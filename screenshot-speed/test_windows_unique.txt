@@ -1,0 +1,27 @@
+test_windows_portion, but with DXcam video mode off:
+Benchmark 1: python .\screenshot-speed\using_dxcam.py
+  Time (mean ± σ):     14.966 s ±  0.454 s    [User: 9.338 s, System: 8.197 s]
+  Range (min … max):   13.820 s … 15.298 s    10 runs
+
+Video mode off has a huge effect, why?
+So yeah, it's pretty telling... video mode is basically cheating. But not really...?
+
+Counting unique frames for test_windows_portion...
+
+Pillow    FPS: 23.70    Time taken: 15.19s    Unique frames: 315/360
+MSS       FPS: 59.80    Time taken: 6.02s     Unique frames: 154/360
+DX off    FPS: 27.07    Time taken: 13.30s    Unique frames: 337/360
+DX on     FPS: 625.38   Time taken: 0.58s     Unique frames: 17/360
+(Youtube content only plays at 25 FPS max... sigh)
+
+Using UFO motion tests and capturing the whole screen, 120 frames?
+Fullscreen: https://www.testufo.com/framerates#count=6&background=stars&pps=1440&fullscreen=1
+
+Pillow    FPS: 19.35    Time taken: 6.20s     Unique frames: 101/120
+MSS       FPS: 24.72    Time taken: 4.86s     Unique frames: 109/120
+DX off    FPS: 56.20    Time taken: 2.14s     Unique frames: 120/120
+DX on     FPS: 59.93    Time taken: 2.00s     Unique frames: 106/120
+
+Aha! I see... DX has a lot of optimizations, including only processing new frames when something's changed.
+But overall, DXcam is much faster than both of the other options. So just use it on Windows.
+What about Mac and Linux? Let's see...

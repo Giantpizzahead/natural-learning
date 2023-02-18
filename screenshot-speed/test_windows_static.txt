@@ -1,0 +1,17 @@
+Windows, whole screen (1920 x 1200), mostly static image, 0.5 second start delay, 180 frames
+Fullscreen: VS Code editor
+
+Benchmark 1: python .\screenshot-speed\using_pillow.py
+  Time (mean ± σ):      7.238 s ±  0.133 s    [User: 1.294 s, System: 2.602 s]
+  Range (min … max):    7.067 s …  7.552 s    10 runs
+GPU: ~20%
+
+Benchmark 2: python .\screenshot-speed\using_mss.py
+  Time (mean ± σ):      6.849 s ±  0.019 s    [User: 0.865 s, System: 1.786 s]
+  Range (min … max):    6.833 s …  6.883 s    10 runs
+GPU: ~20%
+
+Benchmark 3: python .\screenshot-speed\using_dxcam.py
+  Time (mean ± σ):      1.662 s ±  0.021 s    [User: 1.281 s, System: 0.593 s]
+  Range (min … max):    1.628 s …  1.691 s    10 runs
+GPU: ~5%

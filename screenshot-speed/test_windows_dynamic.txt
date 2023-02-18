@@ -1,0 +1,19 @@
+Windows, whole screen (1920 x 1200), dynamic video, 0.5 second start delay, 180 frames
+Fullscreen video: https://www.youtube.com/watch?v=Ps-0f0K6izM
+
+Benchmark 1: python .\screenshot-speed\using_pillow.py
+  Time (mean ± σ):      8.885 s ±  0.517 s    [User: 1.479 s, System: 3.209 s]
+  Range (min … max):    7.780 s …  9.400 s    10 runs
+GPU: ~35%
+
+Benchmark 2: python .\screenshot-speed\using_mss.py
+  Time (mean ± σ):      7.104 s ±  0.155 s    [User: 0.901 s, System: 2.397 s]
+  Range (min … max):    6.981 s …  7.442 s    10 runs
+GPU: ~30%
+
+Benchmark 3: python .\screenshot-speed\using_dxcam.py
+  Time (mean ± σ):      2.487 s ±  0.181 s    [User: 2.416 s, System: 1.403 s]
+  Range (min … max):    2.130 s …  2.730 s    10 runs
+GPU: Widely varied with many spikes, ~30% average?
+
+It doesn't matter how often the screen updates, the above results still hold.
