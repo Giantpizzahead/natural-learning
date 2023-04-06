@@ -11,6 +11,10 @@ from mss.exception import ScreenShotError
 
 def mss(**kwargs: Any) -> MSSBase:
     """Factory returning a proper MSS class instance.
+    Note: There are important optimization arguments for Windows (FastMSS)!
+    Namely, video_mode (bool), target_fps (int), and region (tuple).
+    See the docs for more information.
+
     It detects the platform we are running on
     and chooses the most adapted mss_class to take
     screenshots.

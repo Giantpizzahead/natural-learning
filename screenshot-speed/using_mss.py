@@ -6,11 +6,12 @@ import time
 start_time = time.time()
 
 START_DELAY = 0.5
-NUM_FRAMES = 600
-BBOX = None
+NUM_FRAMES = 120
+# BBOX = None
 # BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
+BBOX = (0, 0, 2, 2)
 COUNT_UNIQUE = False
-DEBUG = True
+DEBUG = False
 
 # =============================================================================
 # BEGIN SCREENSHOT CODE

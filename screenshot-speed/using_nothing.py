@@ -7,9 +7,9 @@ import time
 start_time = time.time()
 
 START_DELAY = 0.5
-NUM_FRAMES = 60
-# BBOX = None
-BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
+NUM_FRAMES = 120
+BBOX = None
+# BBOX = (1920//2-256, 1200//2-256, 1920//2+256, 1200//2+256)
 COUNT_UNIQUE = False
 DEBUG = False
 
